@@ -228,14 +228,7 @@ def main():
         print("\n" + "=" * 70)
         print("  ✓ DEMO COMPLETE!")
         print("=" * 70)
-        print("\n  All security features demonstrated successfully.")
-        print("  The multimodal firewall can detect:")
-        print("    • Prompt injection in text")
-        print("    • Hidden malicious text in images")
-        print("    • Malicious QR codes")
-        print("    • Data exfiltration attempts")
-        print("\n  Thank you for watching! 🎉")
-        print("=" * 70 + "\n")
+    
         
     except KeyboardInterrupt:
         print("\n\n  Demo interrupted by user.")
