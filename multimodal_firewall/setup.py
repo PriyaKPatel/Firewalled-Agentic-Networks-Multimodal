@@ -10,12 +10,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="multimodal-firewall",
     version="1.0.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="PriyaKPatel",
+    author_email="priyakpatel@users.noreply.github.com",
     description="Multimodal extension for Firewalled Agentic Networks - Adds image, QR code, and OCR support",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/Firewalled-Agentic-Networks-Multimodal",
+    url="https://github.com/PriyaKPatel/Firewalled-Agentic-Networks-Multimodal",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",

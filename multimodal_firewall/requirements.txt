@@ -1,7 +1,4 @@
-# Multimodal Firewall Dependencies
-# Install with: pip install -r requirements.txt
 
-# Core Dependencies
 easyocr>=1.7.0          # OCR text extraction from images
 pyzbar>=0.1.9           # QR code detection and decoding
 opencv-python>=4.8.0    # Image processing and computer vision

@@ -339,9 +339,9 @@ If using in research:
 ```bibtex
 @misc{multimodal_firewall_2024,
   title={Multimodal Firewall for LLM Agentic Networks},
-  author={Your Name},
+  author={PriyaKPatel},
   year={2024},
-  howpublished={\url{https://github.com/yourusername/multimodal-firewall}}
+  howpublished={\url{https://github.com/PriyaKPatel/Firewalled-Agentic-Networks-Multimodal}}
 }
 ```
 

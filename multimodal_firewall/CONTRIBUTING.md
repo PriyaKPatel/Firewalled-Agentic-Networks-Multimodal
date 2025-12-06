@@ -42,7 +42,7 @@ Thank you for your interest in contributing to the Multimodal Firewall extension
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/Firewalled-Agentic-Networks-Multimodal.git
+git clone https://github.com/PriyaKPatel/Firewalled-Agentic-Networks-Multimodal.git
 cd Firewalled-Agentic-Networks-Multimodal/multimodal_firewall
 
 # Install dependencies
