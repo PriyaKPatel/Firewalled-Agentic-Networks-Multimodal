@@ -10,3 +10,9 @@ pydantic-core
 notebook
 numpy
 pandas
+# Multimodal Firewall Dependencies
+easyocr
+pyzbar
+opencv-python
+Pillow
+llm-guard

@@ -90,6 +90,7 @@ if config["external_options"] != "":
         apply_input_firewall=config["apply_input_firewall"],
         input_guidelines_prompt=input_guidelines_prompt,
         predefined_language=fixed_input_firewall,
+        apply_multimodal_firewall=config.get("apply_multimodal_firewall", False),
     )
 
 # generate initial plan

@@ -1,0 +1,22 @@
+# Multimodal Firewall Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core Dependencies
+easyocr>=1.7.0          # OCR text extraction from images
+pyzbar>=0.1.9           # QR code detection and decoding
+opencv-python>=4.8.0    # Image processing and computer vision
+Pillow>=10.0.0          # Image loading and manipulation
+numpy>=1.24.0           # Numerical operations
+
+# Security Scanning
+llm-guard>=0.3.0        # LLM security toolkit (PromptInjection, PII, Toxicity, Secrets)
+
+# Optional: GPU Support for faster OCR
+# torch>=2.0.0          # Uncomment for GPU-accelerated OCR
+# torchvision>=0.15.0   # Uncomment for GPU-accelerated OCR
+
+# Development Dependencies (optional)
+# pytest>=7.0.0         # Testing
+# black>=23.0.0         # Code formatting
+# flake8>=6.0.0         # Linting
+

@@ -31,6 +31,14 @@ from external_agent.apply_language import (
 
 from external_agent.language_checker import check_compliance, process_final_dict
 
+# Import multimodal firewall (optional - graceful fallback if not available)
+try:
+    from multimodal_firewall import MultimodalFilter
+    MULTIMODAL_AVAILABLE = True
+except ImportError:
+    MULTIMODAL_AVAILABLE = False
+    print("Warning: Multimodal firewall not available. Install dependencies: pip install easyocr pyzbar opencv-python llm-guard")
+
 mode = {
     "benign_easy": benign_mode_easy,
     "benign_hard": benign_mode_hard,
@@ -52,6 +60,7 @@ class External:
         apply_input_firewall: bool = False,
         input_guidelines_prompt: str = "",
         predefined_language: str = "",
+        apply_multimodal_firewall: bool = False,
     ) -> None:
         print(external_agent_mode)
         self.external_agent_role = external_agent_role
@@ -89,6 +98,14 @@ class External:
         self.predefined_input_firewall_intro = predefined_input_firewall_intro
 
         self.names_lookup = {}
+        
+        # Initialize multimodal firewall if available
+        self.apply_multimodal_firewall = apply_multimodal_firewall and MULTIMODAL_AVAILABLE
+        if self.apply_multimodal_firewall:
+            self.multimodal_filter = MultimodalFilter(use_llm_guard=True)
+            print("Multimodal firewall enabled: Images, QR codes, and text will be scanned")
+        else:
+            self.multimodal_filter = None
 
     def get_previous_names(self) -> str:
         """
@@ -254,6 +271,33 @@ class External:
 
         assert PreviousResponse != None
         self.process_received_turn(PreviousResponse)
+        
+        # Apply multimodal firewall FIRST (before other processing)
+        if self.apply_multimodal_firewall and self.multimodal_filter:
+            multimodal_result = self.multimodal_filter.process_content(
+                PreviousResponse.answer, content_type='auto'
+            )
+            
+            print("\n========= Multimodal Firewall Scan =========")
+            print(f"Content Type: {multimodal_result['content_type']}")
+            print(f"Is Safe: {multimodal_result['is_safe']}")
+            if multimodal_result['warnings']:
+                print(f"Warnings: {multimodal_result['warnings']}")
+            if multimodal_result['extracted_text']:
+                print(f"Extracted Text: {multimodal_result['extracted_text'][:200]}...")
+            print("===========================================\n")
+            
+            # If not safe, block the message
+            if not multimodal_result['is_safe']:
+                blocked_response = Response(
+                    type="external_agent_return",
+                    answer=multimodal_result['sanitized']
+                )
+                return blocked_response, multimodal_result['sanitized']
+            
+            # If safe, use sanitized version for further processing
+            PreviousResponse.answer = multimodal_result['sanitized']
+        
         current_history = format_history(self.history)
 
         start_turn_prompt_updated = start_turn_prompt.format(
